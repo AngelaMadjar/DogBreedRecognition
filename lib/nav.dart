@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dog_breed_recognition/dog_scanner.dart';
 import 'dog_searcher.dart';
 
+
+// NOTE: This class creates the navigation bar
+
+
+
 class Nav extends StatefulWidget {
   @override
   _NavState createState() => _NavState();
@@ -12,9 +17,9 @@ class _NavState extends State<Nav> {
   // the selected index should be displayed on tap
 
   List<Widget> _widgetOptions = <Widget>[
-    Home(), // index 0 (corresponding page for the selected icon)
+    Home(), // index 0 (corresponding to the scanner feature)
     Text('Second Page'), // index 1
-    SearchScreen(), // index 2
+    SearchScreen(), // index 2 (corresponding to the searching dogs for sale feature)
   ];
 
   // adding functionality to the navbar

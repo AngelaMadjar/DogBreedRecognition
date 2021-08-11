@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:dog_breed_recognition/classifier.dart';
-import 'classifier.dart';
+import 'package:dog_breed_recognition/classifier/classifier.dart';
+import 'classifier/classifier.dart';
+
+
+// NOTE: This class provides the main functionality of the app - classifying the dog breed
+
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,10 +18,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  // An instance of the trained model
   final Classifier classifier = Classifier();
+
+  // Enables choosing an image
   final picker = ImagePicker();
+
+  // At the beginning the dog breed is an empty string
   String dogBreed = "";
+
+  // A variable that will store the accuracy of the prediction (probability)
   late String dogProb;
+
+  // The chosen image
   var image;
 
   @override
@@ -24,14 +39,14 @@ class _HomeState extends State<Home> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      //First, we create the background
+      // First, we create the background
       body: Stack(
-        //we use stack since we will put two layers on top of each other
+        // We use stack since we will put two layers on top of each other
         children: [
-          //the layer in the back
+          // The layer in the back
           Positioned(
-              height: size.height * 0.4, //cover 40% of the top of the screen
-              width: size.width, //cover full width
+              height: size.height * 0.4, // Cover 40% of the top of the screen
+              width: size.width, // Cover full width
               child: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -41,13 +56,13 @@ class _HomeState extends State<Home> {
                     : FileImage(File(image.path)),
                 fit: BoxFit.cover,
               )))),
-          //The layer in the front
+          // The layer in the front
           Positioned(
-            top: size.height * 0.35, //we want some overlap with the back layer
-            height: size.height * 0.65, //sum up to 1
-            width: size.width, //cover full width
+            top: size.height * 0.35, // We want some overlap with the back layer
+            height: size.height * 0.65, // Sum up to 1
+            width: size.width, // Cover full width
             child: Container(
-              //creating rounded angles on the front layer
+              // Creating rounded angles on the front layer
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -55,23 +70,24 @@ class _HomeState extends State<Home> {
                   topRight: Radius.circular(36.0),
                 ),
               ),
-              //Adding text to the front layer
+              // Adding text to the front layer
               child: Column(
                 children: [
                   SizedBox(
-                    height: 80, //push the text down
+                    height: 80, // Push the text down
                   ),
                   Text(
-                    "Prediction",
+                    "Dog Breed Prediction",
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(dogBreed == "" ? "" : "$dogProb% $dogBreed",
+                  Text(dogBreed == "" ? "" : "$dogProb% $dogBreed", // If the classifier worked successfully,
+                      // There will be some values for the dogBreed and the accuracy of the prediction
                       style: TextStyle(
                           fontSize: 20.0,
                           color: Colors.green,
@@ -79,7 +95,7 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 90,
                   ),
-                  //Creating buttons
+                  // Creating buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -93,6 +109,7 @@ class _HomeState extends State<Home> {
                                   maxWidth: 300,
                                   imageQuality: 100);
 
+                              // One option is to classify an image taken at the moment
                               final outputs =
                                   await classifier.classifyImage(image);
 
@@ -135,6 +152,7 @@ class _HomeState extends State<Home> {
                                   maxWidth: 300,
                                   imageQuality: 100);
 
+                              // Another option is to classify an image chosen from gallery
                               final outputs =
                                   await classifier.classifyImage(image);
 
