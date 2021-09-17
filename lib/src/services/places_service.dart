@@ -5,7 +5,7 @@ import 'dart:convert' as convert;
 import 'package:dog_breed_recognition/src/models/place_search.dart';
 
 class PlacesService {
-  final key = 'AIzaSyDh8MLfMFAG2_wzQyKVNciytU5vliO5bMo';
+  final key = 'YOUR_API_KEY';
 
   Future<List<PlaceSearch>> getAutocomplete(String search) async {
     var url =
