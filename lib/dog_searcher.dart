@@ -74,15 +74,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             child: TextFormField(
                               controller: _controller,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(27.0),
-                                  borderSide: BorderSide(
-                                    width: 0,
-                                    style: BorderStyle.none,
-                                  ),
-                                ),
-                                filled: true,
-                                fillColor: Colors.black12,
+                                // border: OutlineInputBorder(
+                                //   borderRadius: BorderRadius.circular(27.0),
+                                //   borderSide: BorderSide(
+                                //     width: 0,
+                                //     style: BorderStyle.none,
+                                //   ),
+                                // ),
+                                //filled: true,
+                                // fillColor: Colors.black12,
                                 hintText: '    Search..',
                                 hintStyle: TextStyle(
                                     color: Colors.black38
@@ -97,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                         // Creating the Search button which invokes the functionality of the search bar
                         MaterialButton(
-                          child: Icon(Icons.search_rounded, color: Colors.black),
+                          child: Icon(Icons.search, color: Colors.grey),
                           onPressed: () async {
                             setState(() {
                               isLoading = true; // Changing the state
